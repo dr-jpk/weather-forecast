@@ -3,7 +3,7 @@
     - [Context](#Context)
     - [Objectives for Phase I](#Objectives-for-Phase-I)
     - [Executive Team](#Executive-Team)
-- [Understanding and manipulating data](#)
+- [Understanding and manipulating data](#Understanding-and-manipulating-data)
     - [Framework](#Framework)
     - [Relevance](#Relevance)
     - [Preprocessing and feature engineering](#Preprocessing-and-feature-engineering)
