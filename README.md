@@ -61,8 +61,11 @@ An example of latest weather observations in Canberra: http://www.bom.gov.au/cli
     1. The license of our project can be found here [LICENSE](LICENSE)
 0. **Dependencies**:<br>Install the dependencies (in a dedicated environment as discussed in [Code](#Code)):<br>`pip install -r requirements.txt`
 0. **Data**:<br>The data is not included in this repository and a placeholder file [weatherAUS.csv](data/weatherAUS.csv) has to be replaced by the real data. We used the kaggle dataset which can be downloaded [here](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package).
-0. **Preprocessing**:<br>Run the preprocessing script to create pkl files with preprocessed data:<br>`python notebooks/data_preprocessing_JP.py`
-0. **Modeling**:<br>Run the modeling script to create a pkl file with the pretrained model:<br>`python notebooks/data_modeling_JP.py`
+0. Go to the notebooks directory:<br>`cd notebooks`
+0. **Preprocessing**:<br>Run the preprocessing script to create pkl files with preprocessed data:<br>`python data_preprocessing_JP.py`
+0. **Modeling**:<br>Run the modeling script to create a pkl file with the pretrained model:<br>`python data_modeling_JP.py`
 0. **Apps**:
-    1. **python app**:<br>run the python app and give a date and location when asked to test the model: `python notebooks/app_JP.py`
-    1. **Streamlit app**:<br>run the Streamlit app: `streamlit run streamlit_app/app.py`<br>The app should then be available at [localhost:8501](http://localhost:8501).
+    1. **python app**:<br>run the python app and give a date and location when asked to test the model: `python app_JP.py`
+    1. **Streamlit app**:
+        1. Go to the streamlit directory:<br>`cd ../streamlit_app`
+        1. <br>run the Streamlit app: `streamlit run streamlit_app/app.py`<br>The app should then be available at [localhost:8501](http://localhost:8501).
