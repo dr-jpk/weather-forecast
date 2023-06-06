@@ -19,7 +19,7 @@
             - [Bagging for RandomForestClassifier](#Bagging-for-RandomForestClassifier)
         - [Gaussian Naive Bayes](#Gaussian-Naive-Bayes)
         - [Deep Learning - Keras](#Deep-Learning---Keras)
-        - [Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier-(with-default-hyperparameters-and-imblearn-BalancedRF))
+        - [Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier)
             - [Random Forest using only most important features as input](#Random-Forest-using-only-most-important-features-as-input)
     - [Conclusions from all models](#Conclusions-from-all-models)
     - [Proposal for further feature engineering - including data from nearby stations](#Proposal-for-further-feature-engineering---including-data-from-nearby-stations)
@@ -585,7 +585,7 @@ During training, loss and accuracy on both the training and validation sets are 
 
 It is worth noting that the model may have been over-fitted to the training data, as the validation accuracy did not improve after the 19th epoch, while the training accuracy continued to increase. To mitigate over-fitting, regularization techniques such as dropout or L1/L2 regularization can be applied, or the model architecture can be simplified. In addition, the model's performance can be evaluated on a test set (hold-out) to get an unbiased estimate of its performance on new, unseen data. 
 
-### Best Model - Random Forest Classifier (with default hyperparameters and imblearn BalancedRF)
+### Best Model - Random Forest Classifier
 
 The random forest model seems to be a good first approach, as it features internal bagging (of decision trees with random initial parameters), is robust against overfitting and yields feature importances for a good interpretability. Since it separates the data into classes by splitting according to a threshold on the values of features, it is especially useful to, for instance, differentiate the different locations and classifiy the weather in high or low humidity branches, where humidity will likely be an important feature, as it rises when rain is to be expected.
 
@@ -1153,7 +1153,7 @@ However, no significant differences in the model's performance was found. This i
 | avg_Humidity3pm   |                 0.08 |
 | Humidity3pm       |                 0.08 |
 
-The performance is almost exactly the same as for the prebious random forest that was trained on the less advanced preprocessing without weighted-average features ([Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier-(with-default-hyperparameters-and-imblearn-BalancedRF))). So the additional feature engineering does not improve the performance. However, it might improve the performance of more complex deep learning algorithms. The table with the feature importances shows, that the random forest uses the weighted-averaged ("avg_") features as much as the initial features. *Sunshine* and *Humidity3pm* features stay the most important features and their importance is equally divided to "avg_" and initial feature. This indicates, that the new features are meaningful, although they do not improve the performance as anticipated.
+The performance is almost exactly the same as for the prebious random forest that was trained on the less advanced preprocessing without weighted-average features ([Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier)). So the additional feature engineering does not improve the performance. However, it might improve the performance of more complex deep learning algorithms. The table with the feature importances shows, that the random forest uses the weighted-averaged ("avg_") features as much as the initial features. *Sunshine* and *Humidity3pm* features stay the most important features and their importance is equally divided to "avg_" and initial feature. This indicates, that the new features are meaningful, although they do not improve the performance as anticipated.
 Modelling only the *MelbourneAirport* location which featured the cleanest and most reliable data (including the weighted-average of nearby stations within a 100km radius) did not change the model performance significantly. Therefore, we conclude, that our model reached the maximum possible performance for the given data.
 
 ### Short Summary of all Models
