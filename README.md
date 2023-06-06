@@ -68,4 +68,4 @@ An example of latest weather observations in Canberra: http://www.bom.gov.au/cli
     1. **python app**:<br>run the python app and give a date and location when asked to test the model: `python app_JP.py`
     1. **Streamlit app**:
         1. Go to the streamlit directory:<br>`cd ../streamlit_app`
-        1. <br>run the Streamlit app: `streamlit run streamlit_app/app.py`<br>The app should then be available at [localhost:8501](http://localhost:8501).
+        1. <br>run the Streamlit app:<br>`streamlit run app.py`<br>The app should then be available at [localhost:8501](http://localhost:8501).
