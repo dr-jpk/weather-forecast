@@ -46,8 +46,31 @@ pip install -r requirements.txt
 ```
 
 ## Streamlit App
-
+### Description
 A [Streamlit](https://streamlit.io/) application including a presentation of the project and an interactive demo is available in the [streamlit_app](streamlit_app) directory. You can use this application to get an interactive experience of our project.
+### Preview
+<details>
+<summary><b>Click here to expand this section with screenshots of our Streamlit app</b></summary>
+
+Some screenshots of the Streamlit app are shown below. In a first tab, you are introduced to our project.
+
+You can choose between displaying a pdf presentation within Streamlit or with a pdf viewer of your choice.
+
+<img src="streamlit_app/assets/streamlit_presentation_tab.png"/>
+
+In the second tab of our app, you can get active and give a date and location of your choice as input.
+
+<img src="streamlit_app/assets/streamlit_app_tab.png"/>
+
+If you press "Submit", the app will run a pretrained model on your inputs and tell you, if it is going to rain in your location on the next day.
+
+<img src="streamlit_app/assets/streamlit_app_tab1.png"/>
+
+In the final tab, we present the most important conclusions of our project and give an outlook on future work.
+
+<img src="streamlit_app/assets/streamlit_conclusion_tab.png"/>
+
+</details>
 
 ## Using the (Streamlit) App
 
