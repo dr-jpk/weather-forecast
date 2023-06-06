@@ -14,7 +14,7 @@
     - [Model choice and optimization](#Model-choice-and-optimization)
     - [Results](#Results)
         - [Logistic Regression](#Logistic-Regression)
-        - [Support Vector Machine (SVM)](#Support-Vector-Machine-(SVM))
+        - [Support Vector Machine](#Support-Vector-Machine)
         - [RandomForestClassifier](#RandomForestClassifier)
             - [Bagging for RandomForestClassifier](#Bagging-for-RandomForestClassifier)
         - [Gaussian Naive Bayes](#Gaussian-Naive-Bayes)
@@ -29,7 +29,6 @@
         - [SVM](#SVM)
         - [Logistic Regression](#Logistic-Regression)
         - [Keras for MelbourneAirport](#Keras-for-MelbourneAirport)
-        - [after modify the data loading part and update the input dimension in the Keras](#after-modify-the-data-loading-part-and-update-the-input-dimension-in-the-Keras)
         - [Random Forest Classifier](#Random-Forest-Classifier)
         - [Short Summary of all Models](#Short-Summary-of-all-Models)
 - [Conclusions and Outlook](#Conclusions-and-Outlook)
@@ -422,7 +421,7 @@ For our case the recall is an interesting metric to use as the recall which mesu
 
 The precision which is a measures of the proportion of true positives out of all the instances predicted as positive, and f1 which is the harmonic mean of preicision and recall both have a score of 0.51 and 0.61 for the classification 1 respectively, which is extremely low, but have a score of 0.92 and 0.85 for the classification 0 respectively which can is due to the imbalance in our dataset. The logistic regression not being able to overcome this imbalance does not make it a suitable model to use in order to get the best predictions.
 
-### Support Vector Machine (SVM)
+### Support Vector Machine
 SVM is a linear statistical model well suited for binary classification. In order, to get the best possible results I decided to use a grid search. However, the model takes too much time to process the informations, and give any results. Using the SVM with default parameters, and putting the hyperparameter gamma='scale', the model runs faster.
 
 The "Confusion matrix:
