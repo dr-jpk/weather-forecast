@@ -68,7 +68,7 @@ covering more complex variables.
 
 We aim to employ and consult with a wide variety of resources to use in training
 our data, in order to produce systems and forecasts that remain relevant and valid
-from a technical and scientific standpoints as well.
+from both a technical and scientific standpoint.
 
 From a technical point of view, we will initially utilize daily weather data from federal
 Bureau of Meteorology [BOM](http://www.bom.gov.au/) of Australia. We will also rely on data from a
@@ -95,7 +95,7 @@ regarding the likelihood of rainfall as a first stage, where it will be predicte
 there will or will not be rain on the next day for each location we have weather data
 for (yes/no, 1 day, fixed locations).
 
-Forecasts will be based on the given kaggle dataset (for now).We might possibly
+Forecasts will be based on the given kaggle dataset (for now). We might possibly
 also compare performance with data from recent months (e.g. train on data up to
 2017 and predict weather for 11.2022 - 04.2023)
 
@@ -157,7 +157,7 @@ An example of latest weather observations in Canberra: http://www.bom.gov.au/cli
         > "Copyright of Bureau of Meteorology materials resides with the Commonwealth of Australia. Apart from any fair dealing for purposes of study, research, criticism and review, as permitted under copyright legislation, no part of this product may be reproduced, re-used or redistributed for any commercial purpose whatsoever, or distributed to a third party for such purpose, without written permission from the Director of Meteorology."
 - Volume of our dataset:
     - 14MB of (dominantly) numeric data
-    - 23 variables with about about 150k entries / observations
+    - 23 variables with about 150k entries / observations
     - 49 different weather stations
 
 ### Relevance
@@ -167,8 +167,8 @@ RainToday.
 
 As for the target variable we will focus on the RainTomorrow variable for the moment.
 
-The data analyses, and our data visualisation allowed us to see a strong correlation between
-the 9am/3pm variables, as well as the Min/MaxTemp, which is explained by this datas being
+The data analyses, and our data visualization allowed us to see a strong correlation between
+the 9am/3pm variables, as well as the Min/MaxTemp, which is explained by this data being
 from the same day. We also noticed that the temperature of Australia is at its lowest around
 June when the winter starts, which indicates a cycle of seasons in Australia.
 
@@ -218,7 +218,7 @@ For the following variables, the data cleaning has been done as such,
     - **feature engineering** for wind directions:
         - Replace each of the WindDir variable entries with a numerical value between 0 and $2\pi$ (0 = North, $\pi$ = South, 16 compass directions given so use steps of $\frac{\pi}{8}$)
         - add for each of the WindDir variables two new variables indicating the direction of the wind as numerical value using a cosine and sine functions of the previously changed WindDir variables.
-        - This ensures that the models can understand, that the compass directions are periodic and for instance N, NNE, and NNW are close together, while N and S are the most separated.
+        - This ensures that the models can understand that the compass directions are periodic and for instance N, NNE, and NNW are close together, while N and S are the most separated.
 - RainToday/RainTomorrow:
     - Replace the values No, and Yes, by 0 and 1 respectively.
     - Drop the entries with missing values in these variables, as there are few missing values (about 2%) and we do not want to bias our target variable by replacing missing values for instance with the mode.
@@ -229,12 +229,12 @@ Finalizing the data cleaning we remove all variables that are of no benefit for 
     - Date: replaced by Day, Month, Year variables
     - Location: replaced by longitude, latitude and elevation coordinates
     - NearestBureauStationNr: only of interest for cross-checking or extending the data
-    - WindGustDir, WindDir9am,WindDir3pm: all replaced by sine and cosine variables
+    - WindGustDir, WindDir9am, WindDir3pm: all replaced by sine and cosine variables
 
-Thus the cleaned dataset for modeling purposes includes the following variables:
+Thus, the cleaned dataset for modeling purposes includes the following variables:
 >["Day", "Month", "Year", "Location_Latitude", "Location_Longitude", "Location_Elevation", "MinTemp", "MaxTemp", "Evaporation", "Sunshine", "WindGustSpeed", "WindGustDir_cos", "WindGustDir_sin", "WindDir9am_cos", "WindDir9am_sin", "WindDir3pm_cos", "WindDir3pm_sin", "WindSpeed9am", "WindSpeed3pm", "Humidity9am", "Humidity3pm", "Pressure9am", "Pressure3pm", "Cloud9am", "Cloud3pm", "Temp9am", "Temp3pm", "Rainfall", "RainToday", "RainTomorrow"]
 
-After cleaning the data for our initial variables we can create new features that may be more
+After cleaning the data for our initial variables, we can create new features that may be more
 informative for the target variable. For example, create a new feature that combines wind
 direction and wind speed.
 
@@ -243,7 +243,7 @@ ensure that all the numerical variables have the same range and are on the same 
 Depending on the model we decide to use we should use the StandarScaler for the
 numerical variables.
 
-If necessary we can handle imbalanced data, by checking if the dataset is balanced or
+If necessary, we can handle imbalanced data, by checking if the dataset is balanced or
 imbalanced. If it is imbalanced, we can use techniques like oversampling, undersampling, or
 SMOTE (Synthetic Minority Over-sampling Technique) to balance the dataset.
 
@@ -311,7 +311,7 @@ As visible in the data audit table below, the data does not feature any exceptio
 
 ### Visualizations and Statistics
 <img src="data/plots/map_of_locations.png" width="600"/>
-In this first plot we depict a map of Australia and added markers at each location, for which we have weather data. The color encodes the topography. Note that there is one weather station on an island in the East of Australia (between Australia and New Zealand), which might feature a different climate zone and has to be handled with care. Furthermore, most weather stations are located in the South-West and -East of Australia, this is likely due to the higher population density in these regions.
+In this first plot we depict a map of Australia and added markers at each location, for which we have weather data. The color encodes the topography. Note that there is one weather station on an island in the East of Australia (between Australia and New Zealand), which might feature a different climate zone and must be handled with care. Furthermore, most weather stations are located in the South-West and -East of Australia, this is likely due to the higher population density in these regions.
 
 <img src="data/plots/heatmap_preprocessed_data.png" width="600"/>
 
@@ -359,7 +359,7 @@ The weather forecast project is typically a time series forecasting problem. Mac
 Machine learning methods for time series forecasting typically require careful feature engineering, which involves selecting and transforming the relevant weather variables to improve the model's accuracy. In addition, the evaluation of machine learning models for time series forecasting may involve metrics such as mean absolute error (MAE), root mean squared error (RMSE), or coefficient of determination (R-squared) to compare the predicted values with the actual values.
 
 The task of the weather forecast project is to predict weather conditions in Australia, specifically to predict whether it will rain tomorrow based on historical weather observations. This is a predictive modeling task that falls under the category of time series forecasting.
-Model selection: Choose a suitable machine learning model or algorithm for the task, such as decision trees, random forests, gradient boosting, or neural networks. Consider the advantages and limitations of each model, and select the one that best fits the data and the problem.
+Model selection: Choose a suitable machine learning model or algorithm for the task, such as decision trees, random forests, gradient boosting, or neural networks. Consider the advantages and limitations of each model and select the one that best fits the data and the problem.
 
 1. Model training: Train the selected model on the prepared dataset using an appropriate training strategy, such as cross-validation or time series split. Optimize the model hyperparameters to maximize the performance metric of interest.
 
@@ -374,25 +374,25 @@ Linear regression can be used for weather forecasting, but it may not be the bes
 
 In the example code provided, a random forest regression model is used instead of a linear regression model. Random forest regression is a more flexible model that can handle non-linear relationships between the predictor variables and the target variable, and it can capture complex interactions between the variables.
 
-That being said, there are also other machine learning models that can be used for weather forecasting, such as neural networks, support vector machines, and time-series models like ARIMA and LSTM. The choice of model depends on the specific problem and data at hand, and it's important to evaluate different models and select the one that performs the best for the given task.
+That being said, there are also other machine learning models that can be used for weather forecasting, such as neural networks, support vector machines, and time-series models like ARIMA and LSTM. The choice of model depends on the specific problem and data at hand, and it is important to evaluate different models and select the one that performs the best for the given task.
 
 Naive Bayes is a probabilistic algorithm that uses Bayes' theorem to calculate the probability of each class given a set of features. It assumes that the features are conditionally independent of each other given the class. Naive Bayes works well with high-dimensional data and is relatively computationally efficient. However, it makes the naive assumption of feature independence and may not perform well when this assumption is violated.
 
-Random Forest Classifier is an ensemble learning method that constructs multiple decision trees and combines their outputs to make predictions. It works well with complex, non-linear relationships between the features and the target variable. Random Forests are generally more accurate than Naive Bayes and are less susceptible to overfitting, but can be slower to train and may not perform well with highly imbalanced data.
+Random Forest Classifier is an ensemble learning method that constructs multiple decision trees and combines their outputs to make predictions. It works well with complex, non-linear relationships between the features and the target variable. Random Forests are generally more accurate than Naive Bayes and are less susceptible to overfitting but can be slower to train and may not perform well with highly imbalanced data.
 
 Both Naive Bayes and Random Forest Classifier have their strengths and weaknesses, and the choice between them will depend on the specific characteristics of the data and the goals of the prediction task. In the given weather prediction task, Random Forest Classifier achieved higher accuracy and is therefore a good choice.
 
 We omitted trying the SARIMA model because:
-- we have several variables, but SARIMA can only use one such that we would loose information available for modeling
+- we have several variables, but SARIMA can only use one such that we would lose information available for modeling
 - SARIMA would have to be done for each location separately (again information loss)
 - weather might not be a "stationary time series" (e.g. extreme weather events, impact of climate changes, bush fires (humans)), such that SARIMA would not be applicable
 
-Instead we use time for trying other models first, that can make use of the whole information / all variables available to us.
+Instead, we use time for trying other models first, that can make use of the whole information / all variables available to us.
 
 ## Results 
 
 ### Logistic Regression
-Logistic Regression is a linear statistical model well suited for binary classification. It is a simple model, but it is still able to give good results. To optimize the model, and get the best possible results I decided to use a grid search. GridSearchCV performs an exhaustive search over a specified set of parameters chosen prior,  on an estimator which in this case is the Logistic Regression model.
+Logistic Regression is a linear statistical model well suited for binary classification. It is a simple model, but it is still able to give good results. To optimize the model and get the best possible results I decided to use a grid search. GridSearchCV performs an exhaustive search over a specified set of parameters chosen prior, on an estimator which in this case is the Logistic Regression model.
 
 The best parameters return by the grid were {'C': 1, 'solver': 'liblinear'}.
 
@@ -415,14 +415,14 @@ Confusion_matrix:
 | support   | 21098    | 6137    |       0.78 |    27235    |       27235    |
 
 
-The accuracy of 0.78 means that out of all the predictions made, 78 % were correctly predicted my the model, which is not very high in order to consider this model efficient.
+The accuracy of 0.78 means that out of all the predictions made, 78 % were correctly predicted by the model, which is not very high in order to consider this model efficient.
 
-For our case the recall is an interesting metric to use as the recall which mesures the proportion of true positives out of all the actual positive instances. The recall here is quite close for both classifications (0.79 and 0.76 respectively), which is a good indication that the models predictions are good for both classes, however the recall score is still too low.
+For our case, the recall is an interesting metric to use as the recall which mesures the proportion of true positives out of all the actual positive instances. The recall here is quite close for both classifications (0.79 and 0.76 respectively), which is a good indication that the models’ predictions are good for both classes, however the recall score is still too low.
 
-The precision which is a measures of the proportion of true positives out of all the instances predicted as positive, and f1 which is the harmonic mean of preicision and recall both have a score of 0.51 and 0.61 for the classification 1 respectively, which is extremely low, but have a score of 0.92 and 0.85 for the classification 0 respectively which can is due to the imbalance in our dataset. The logistic regression not being able to overcome this imbalance does not make it a suitable model to use in order to get the best predictions.
+The precision which is a measure of the proportion of true positives out of all the instances predicted as positive, and f1 which is the harmonic mean of precision and recall both have a score of 0.51 and 0.61 for the classification 1 respectively, which is extremely low, but have a score of 0.92 and 0.85 for the classification 0 respectively which can be due to the imbalance in our dataset. The logistic regression not being able to overcome this imbalance does not make it a suitable model to use in order to get the best predictions.
 
 ### Support Vector Machine
-SVM is a linear statistical model well suited for binary classification. In order, to get the best possible results I decided to use a grid search. However, the model takes too much time to process the informations, and give any results. Using the SVM with default parameters, and putting the hyperparameter gamma='scale', the model runs faster.
+SVM is a linear statistical model well suited for binary classification. In order, to get the best possible results I decided to use a grid search. However, the model takes too much time to process the information and give any results. Using the SVM with default parameters, and putting the hyperparameter gamma='scale', the model runs faster.
 
 The "Confusion matrix:
 [[16787 	4311]
@@ -441,7 +441,7 @@ The "Confusion matrix:
 | f1-score  |     0.86 |    0.64 |        0.8 |        0.75 |           0.81 |
 | support   | 21098    | 6137    |        0.8 |    27235    |       27235    |
 
-The accuracy of 0.80 means that out of all the predictions made 80% were correct. The svm model have decent results, but still not enough to consider this model viable to be used in weather predictions. The recall score for the two categoris is high, and quite close, but this can't be said for the precision and the f1-score. The results yield are still better than for the logistic regression. However, the computation time of the svm model is quite slow. The training time is very slow, but once the model is trained, the computation time is not still not as fast compared to other models. From the computation time, and the scores obtained, we can't consider svm to be a suitable model to be used in our weather predictions.
+The accuracy of 0.80 means that out of all the predictions made 80% were correct. The svm model have decent results, but still not enough to consider this model viable to be used in weather predictions. The recall score for the two categories is high, and quite close, but this cannot be said for the precision and the f1-score. The results are still better than for the logistic regression. However, the computation time of the svm model is quite slow. The training time is very slow, but once the model is trained, the computation time is still not as fast compared to other models. From the computation time, and the scores obtained, we cannot consider svm to be a suitable model to be used in our weather predictions.
 
 ### RandomForestClassifier
 
@@ -478,7 +478,7 @@ The main reason to use CoBagging is to reduce the variance of the prediction by 
 CoBagging can be particularly effective when the individual models in the ensemble are prone to making different types of errors or when there is significant variability in the data. In such cases, CoBagging can help to smooth out the errors and improve the overall performance of the model.
 
 
-In this code,  first I create a base random forest classifier model with 100 estimators, just like in your original code. Then, we create a bagging classifier model by specifying the base model, the number of estimators (10 in this case), and the random state. I train the bagging classifier model on the training data and evaluate its performance on the testing data, just like before. Note that we also print the feature importances of the base model instead of the bagging classifier model, as the bagging classifier model doesn't have its own feature importances.
+In this code, first I create a base random forest classifier model with 100 estimators, just like in your original code. Then, we create a bagging classifier model by specifying the base model, the number of estimators (10 in this case), and the random state. I train the bagging classifier model on the training data and evaluate its performance on the testing data, just like before. Note that we also print the feature importances of the base model instead of the bagging classifier model, as the bagging classifier model does not have its own feature importances.
 **Overview tables for BalancedRandomForestClassifier(default settings) from imblearn on preprocessed data: NaNs replaced by mean or mode over whole column, standard-scaler, no sampling**
 
 Accuracy: 0.852138791995594
@@ -504,11 +504,11 @@ The model achieved an overall accuracy of 0.852, which means that 85.2% of the p
 
 The confusion matrix shows the number of true positive (TP), false positive (FP), true negative (TN), and false negative (FN) predictions. In this case, the model made 20151 true positive predictions for class 0, 3057 true positive predictions for class 1, 947 false positive predictions for class 1, and 3080 false negative predictions for class 0.
 
-The table below the confusion matrix shows precision, recall, and F1-score for each class, as well as their macro-averaged and weighted-averaged values. Precision is the ratio of true positives to the total predicted positives, recall is the ratio of true positives to the total actual positives, and F1-score is the harmonic mean of precision and recall. The macro-averaged values are the unweighted average of precision, recall, and F1-score for both classes, while the weighted-averaged values take into account the proportion of each class in the data.
+The table below the confusion matrix shows precision, recall, and F1-score for each class, as well as their macro-averaged and weighted-average values. Precision is the ratio of true positives to the total predicted positives, recall is the ratio of true positives to the total actual positives, and F1-score is the harmonic mean of precision and recall. The macro-averaged values are the unweighted average of precision, recall, and F1-score for both classes, while the weighted-average values take into account the proportion of each class in the data.
 
 ### Gaussian Naive Bayes
 
-Gaussian Naive Bayes is a simple and effective probabilistic classification algorithm that can be used for weather forecasting. This algorithm is particularly useful when dealing with high-dimensional data, where the number of features (weather variables) is large. It assumes that each feature follows a Gaussian (normal) distribution, and uses Bayes' theorem to calculate the probability of a certain weather condition (class) given the observed values of the weather variables (features).
+Gaussian Naive Bayes is a simple and effective probabilistic classification algorithm that can be used for weather forecasting. This algorithm is particularly useful when dealing with high-dimensional data, where the number of features (weather variables) is large. It assumes that each feature follows a Gaussian (normal) distribution and uses Bayes' theorem to calculate the probability of a certain weather condition (class) given the observed values of the weather variables (features).
 
 In weather forecasting, we often have a large number of weather variables to consider, such as temperature, humidity, pressure, wind speed, and precipitation. These variables can be used as features in the Gaussian Naive Bayes algorithm, allowing us to make predictions about the weather condition (class) for the next day based on the observed values of these variables.
 
@@ -586,7 +586,7 @@ It is worth noting that the model may have been over-fitted to the training data
 
 ### Best Model - Random Forest Classifier
 
-The random forest model seems to be a good first approach, as it features internal bagging (of decision trees with random initial parameters), is robust against overfitting and yields feature importances for a good interpretability. Since it separates the data into classes by splitting according to a threshold on the values of features, it is especially useful to, for instance, differentiate the different locations and classifiy the weather in high or low humidity branches, where humidity will likely be an important feature, as it rises when rain is to be expected.
+The random forest model seems to be a good first approach, as it features internal bagging (of decision trees with random initial parameters), is robust against overfitting and yields feature importances for a good interpretability. Since it separates the data into classes by splitting according to a threshold on the values of features, it is especially useful to, for instance, differentiate the different locations and classify the weather in high or low humidity branches, where humidity will likely be an important feature, as it rises when rain is to be expected.
 
 Since some features contain a lot of NaN values (10% to about 50% of all entries), and these variables are expected to have a big influence on the model decision (for meteorological reasons), the difference between replacing the NaN values with the mean or mode over the whole column and dropping all rows with NaN values is analyzed. The fraction of NaN values per *Location* for the features with most NaN values (*Sunshine, Cloud9am, Could3pm, Evaporation, Pressure9am, Pressure3pm*) is plotted in the figure below.
 
@@ -623,7 +623,7 @@ The results of the RandomForestClassifier are presented in the table below. Here
 | Sunshine      |                 0.06 |
 | Humidity3pm   |                 0.16 |
 
-Although the accuracy of 0.85 is a good result and due to the imbalance in the target classes, the F1-, and recall score are very imbalanced and worse for the target class defining rainy days (1). This is also visible in the first table showing the confusion matrix. The eight most important features of the model are shown in the last table to interprete the model. From a meteorological standpoint, the feature importances seem to be reasonable: in high humidity and for low sunshine hours and pressures on a day, the probability of having a rainy day on the next day is increased, such that the model bases its decision on thresholds set on these variables.
+Although the accuracy of 0.85 is a good result and due to the imbalance in the target classes, the F1-, and recall score are very imbalanced and worse for the target class defining rainy days (1). This is also visible in the first table showing the confusion matrix. The eight most important features of the model are shown in the last table to interpret the model. From a meteorological standpoint, the feature importances seem to be reasonable: in high humidity and for low sunshine hours and pressures on a day, the probability of having a rainy day on the next day is increased, such that the model bases its decision on thresholds set on these variables.
 
 Trying to counteract the influence of the imbalanced dataset by using the "class_weight" parameter of the RandomForestClassifier of sklearn does not improve the scores, but rather decreased them slightly.
 
@@ -681,13 +681,13 @@ The best accuracy of 0.86 is obtained when using random oversampling and droppin
 | Humidity3pm   |                 0.14 |
 | Sunshine      |                 0.14 |
 
-Comparing the feature importances with the previous results (where NaNs were replaced by mean or mode) it is apparent that dropping all rows with NaN changes the importance of features in the RandomForestClassifier. This is likely due to the significantly changed amount of entries for some features (like *Sunshine*) and the bias induced by replacing NaNs by the mean or mode over the whole column. This way of treating NaNs does not take the different weather characteristics in different weather stations into account, such that the importance of a feature might be degraded. This was likely the case for the *Sunshine* feature, whose importance doubles when dropping all NaN values. In all models *Sunshine* and *Humidity3pm* are the most important features. Also the 3pm variables are always more important than the 9am variables, which indicates, that adding features from e.g. 2 or 3 days before the day to be predicted will not yield any gain in the model performance, because the weather on the next day most strongly depends on the weather parameters on the afternoon of the day before. Therefore, the focus on feature engineering will be on including data from nearby stations rather than data from previous days.
+Comparing the feature importances with the previous results (where NaNs were replaced by mean or mode) it is apparent that dropping all rows with NaN changes the importance of features in the RandomForestClassifier. This is likely due to the significantly changed amount of entries for some features (like *Sunshine*) and the bias induced by replacing NaNs by the mean or mode over the whole column. This way of treating NaNs does not take the different weather characteristics in different weather stations into account, such that the importance of a feature might be degraded. This was likely the case for the *Sunshine* feature, whose importance doubles when dropping all NaN values. In all models *Sunshine* and *Humidity3pm* are the most important features. Also, the 3pm variables are always more important than the 9am variables, which indicates, that adding features from e.g. 2 or 3 days before the day to be predicted will not yield any gain in the model performance, because the weather on the next day most strongly depends on the weather parameters on the afternoon of the day before. Therefore, the focus on feature engineering will be on including data from nearby stations rather than data from previous days.
 
 ### Random Forest using only most important features as input
 
 Additionally, a test was carried out to check, how good the model performs when it only gets the two most important features *Sunshine* and *Humidity3pm* as inputs.
 
-To investiagte why Humidity and Sunshine are so important, a scatter plot of both is shown below, where the value of the target variable *RainTomorrow* is encoded in the color. It is clearly visible that for higher humidities in the afternoon and lower sunshine hours of a specific day, the probability of facing rain on the following day is larger (dominant yellow markers on the bottom right of the plot).
+To investigate why Humidity and Sunshine are so important, a scatter plot of both is shown below, where the value of the target variable *RainTomorrow* is encoded in the color. It is clearly visible that for higher humidities in the afternoon and lower sunshine hours of a specific day, the probability of facing rain on the following day is larger (dominant yellow markers on the bottom right of the plot).
 
 <img src="data/plots/Humidity3pm_vs_Sunshine_RainTomorrow.png" width="600"/>
 
@@ -735,21 +735,21 @@ To investiagte why Humidity and Sunshine are so important, a scatter plot of bot
 | Humidity3pm   |                 0.13 |
 | Sunshine      |                 0.14 |
 
-As can be seen from the summary tables above, the random forest performs worse, when only getting the two most important features as input. However, the model is still performing better than a completely random model. It is concluded, that although *Sunshine* and *Humidity3pm* are by far the most important features for the random forest classifier, the other features are required in addition to obtain the good performance (accuracy rises from 0.72 to 0.86 and F1 also increases by 0.1 to 0.77 for the marco-averaged score).
+As can be seen from the summary tables above, the random forest performs worse, when only getting the two most important features as input. However, the model is still performing better than a completely random model. It is concluded, that although *Sunshine* and *Humidity3pm* are by far the most important features for the random forest classifier, the other features are required in addition to obtain the good performance (accuracy rises from 0.72 to 0.86 and F1 also increases by 0.1 to 0.77 for the macro-averaged score).
 
 ### Conclusions from all models
 
-We can conclude, that out of logistic regression optimized by hyperparameter optimization, SVM (not optimized due to long computation time), (balanced) random forest, Gaussian Naive Bayes, and a Dense Neural Network designed in Keras, the random forest yields the best performance at low computation cost. The random forest yields an accuracy of 0.86 and marco- and weighted-averaged F1-scores of 0.77 and 0.85, respectively, which is slightly larger than for the other models. However, all models performed very similarly without significant differences in these scores. The simplest models namely logistic regression, SVM, and Gaussian Naive Bayes yielded the least performance, all featuring accuracies and marco- and weighted-averaged F1-scores of about 0.8, 0.7, and 0.8, respectively.
+We can conclude, that out of logistic regression optimized by hyperparameter optimization, SVM (not optimized due to long computation time), (balanced) random forest, Gaussian Naive Bayes, and a Dense Neural Network designed in Keras, the random forest yields the best performance at low computation cost. The random forest yields an accuracy of 0.86 and macro- and weighted-averaged F1-scores of 0.77 and 0.85, respectively, which is slightly larger than for the other models. However, all models performed very similarly without significant differences in these scores. The simplest models namely logistic regression, SVM, and Gaussian Naive Bayes yielded the least performance, all featuring accuracies and macro- and weighted-averaged F1-scores of about 0.8, 0.7, and 0.8, respectively.
 
-Crossvalidation for hyperparameter optimization of the RandomForestClassifier might improve the performance. However the features that are most important for the model, contain the most NaN values. So a better treatment of these NaN values is decided to be the best and most important step to improve the model performance. One idea is to add the average value of each variable over all stations nearby the respective station.
+Cross validation for hyperparameter optimization of the RandomForestClassifier might improve the performance. However, the features that are most important for the model, contain the most NaN values. So, a better treatment of these NaN values is decided to be the best and most important step to improve the model performance. One idea is to add the average value of each variable over all stations nearby the respective station.
 
 ### Proposal for further feature engineering - including data from nearby stations
-First steps to include data from nearby stations were undertaken using the geopy library in  python and the webscrapped locations of the weather stations (longitude and latitude data). The plot below shows the locations of all weather stations, which are in the dataset.
+First steps to include data from nearby stations were undertaken using the geopy library in python and the web scrapped locations of the weather stations (longitude and latitude data). The plot below shows the locations of all weather stations, which are in the dataset.
 
 <img src="data/plots/nearby_locations_test.png" width="600"/>
 
 The orange circles are [tissot's indicatrices](https://en.wikipedia.org/wiki/Tissot%27s_indicatrix) and indicate the area around each weather station with a radius of 100km. Distance lines are shown for an exemplary station in the center of Australia, for which also two further. For the densely populated regions at the South-East- and South-West coast of Australia, several weather stations are located within a distance smaller than 100km.For other stations not a single one is located within this distance. However, usually at least one station is located in the same region of Australia (e.g. two stations in the center of Australia and two in North and North-East).
-Therefore, the approach is to include all station within an area covered by a radius of 100km or at least the nearest neighbour. One could also use a clustering model here, but this is omitted for now.
+Therefore, the approach is to include all station within an area covered by a radius of 100km or at least the nearest neighbor. One could also use a clustering model here, but this is omitted for now.
 
 The plan is to calculate the mean value of each feature for these nearby stations and add these new features to the preprocessing pipeline (as additional features). Also, in case there are NaN values for a feature of a station, the mean value for the nearby stations can be used to replace the missing value.
 
@@ -763,15 +763,15 @@ Additional refinements might include:
 # Further modeling after rethinking the preprocessing
 
 As discussed at the end of the previous section on modeling, additional preprocessing steps are implemented to test, whether a better performance can be achieved.
-Several new stragtegies were implemented, which are listed here:
+Several new strategies were implemented, which are listed here:
 
 #### **1. Removing irrelevant data (space):**
 
-Remove all locations, where at least one feature contains exclusively NaN values. These features are almost exclusively the most important features for the RainTomorrow prediction (e.g. Sunshine, Humidity). This justifies to remove these locations, as including a station without any values for such important feature will most likely not improve the model. This leads to the reduction in the amount of locations from 49 to 26 as shown in the plot below.
+Remove all locations, where at least one feature contains exclusively NaN values. These features are almost exclusively the most important features for the RainTomorrow prediction (e.g. Sunshine, Humidity). This justifies removing these locations, as including a station without any values for such important feature will most likely not improve the model. This leads to the reduction in the amount of locations from 49 to 26 as shown in the plot below.
 
 <img src="data/plots/map_of_locations_red_high_NaN_amount.png" width="600"/>
 
-In the plot red triangles mark locations that have to be dropped, due to the NaN features, whereas the circular black markes show the remaining 36 positions of weather stations. Note that 5 out of the remaining 26 stations have less than 50% entries without NaN values in all features, (some only 11%), 11 out of 26 locations have less then 70% entries without NaN in any of the features. This is still a siginificant fraction of NaN values, which has to be handled with care. Taking the average over nearby stations will be the chosen approach here. The table below shows the NaN fractions [%] of most important features (for the random forest with best performance) per location:
+In the plot red triangles mark locations that have to be dropped, due to the NaN features, whereas the circular black markers show the remaining 36 positions of weather stations. Note that 5 out of the remaining 26 stations have less than 50% entries without NaN values in all features, (some only 11%), 11 out of 26 locations have less than 70% entries without NaN in any of the features. This is still a significant fraction of NaN values, which has to be handled with care. Taking the average over nearby stations will be the chosen approach here. The table below shows the NaN fractions [%] of most important features (for the random forest with best performance) per location:
 
 | Location         |   Sunshine |   Humidity3pm |   Cloud3pm |   Pressure3pm |   WindGustSpeed |   Pressure9am |
 |:-----------------|-----------:|--------------:|-----------:|--------------:|----------------:|--------------:|
@@ -802,7 +802,7 @@ In the plot red triangles mark locations that have to be dropped, due to the NaN
 | Williamtown      |       43.3 |           0.3 |       18.1 |           0.4 |             4.6 |           0.4 |
 | Woomera          |       32.9 |           0.9 |       21.7 |           0.5 |             1.3 |           0.4 |
 
-From the table below, which shows the fraction of entries with at least one feature having a NaN value per Location, it is conluded that the *MelbourneAirport* location has the most complete and consistent data.
+From the table below, which shows the fraction of entries with at least one feature having a NaN value per Location, it is concluded that the *MelbourneAirport* location has the most complete and consistent data.
 
 | Location         |   Fraction_of_rows_w_NaN |
 |:-----------------|-------------------------:|
@@ -872,15 +872,15 @@ Concluding from the results of the previous modelling section, oversampling will
 
 #### **4. Feature engineering:**
 
-To provide more important information to the models, namely information on the weather conditions in the surrounding of each station, a weighted-average over nearby locations is calculated for each feature and added as additional features (this is done for all features, except for the datetime features, this increasing the amount of features from 29 to 55). In order to define, which station is considered as "nearby" each station, different metrics for closeness/distance were used:
+To provide more important information to the models, namely information on the weather conditions in the surrounding of each station, a weighted average over nearby locations is calculated for each feature and added as additional features (this is done for all features, except for the datetime features, this increasing the amount of features from 29 to 55). In order to define, which station is considered as "nearby" each station, different metrics for closeness/distance were used:
 
 ##### **Pearson correlation coefficient:**
 
-Pearson correlation coefficient between stations based on *Rainfall* feature: if the correlation between two stations in the Rainfall feature is large, when calculating the correlation over the whole dataset spanning several years, the weather conditions with respect to our target variable *RainTomorrow* are likely (but not certainly) causally connected. Therefore a threshold on the correlation coefficient is required to generate weigthed averaged features from nearby stations. The weight of each station is defined to be equal to the correlation coefficient, i.e. 1 for the station itself and a value between 1 and 0 for the "nearby" stations. Note that this approach is tested in addition to the distance metric, because spatially nearby stations might not share the same weather conditions. For instance at the coast in the south-east of australia, there is a mountain range, so if stations are close to each other but separated by the mountains, the weather conditions and especially "RainTomorrow" might be very different. This is indeed the case as visible in the strong gradient in the cummulative Rainfall map over many years: [BOM](http://www.bom.gov.au/climate/maps/rainfall/?variable=rainfall&map=totals&period=48month&region=nat&year=2023&month=04&day=30). Below, 3 plots are shown giving the color coded correlation coefficient for 3 different central stations. The threshold on the correlation coefficient is chosen such that are spatially relatively close, the next neighbouring station is still included, this is the case for a threshold of about 0.3 as visible in the plot below for the *Cairns* location (Cairns is located at the dark red dot marked with a correlation coefficient of 1.0).
+Pearson correlation coefficient between stations based on *Rainfall* feature: if the correlation between two stations in the Rainfall feature is large, when calculating the correlation over the whole dataset spanning several years, the weather conditions with respect to our target variable *RainTomorrow* are likely (but not certainly) causally connected. Therefore, a threshold on the correlation coefficient is required to generate weighted averaged features from nearby stations. The weight of each station is defined to be equal to the correlation coefficient, i.e., 1 for the station itself and a value between 1 and 0 for the "nearby" stations. Note that this approach is tested in addition to the distance metric, because spatially nearby stations might not share the same weather conditions. For instance, at the coast in the south-east of Australia, there is a mountain range, so if stations are close to each other but separated by the mountains, the weather conditions and especially "RainTomorrow" might be very different. This is indeed the case as visible in the strong gradient in the cumulative Rainfall map over many years: [BOM](http://www.bom.gov.au/climate/maps/rainfall/?variable=rainfall&map=totals&period=48month&region=nat&year=2023&month=04&day=30). Below, 3 plots are shown giving the color-coded correlation coefficient for 3 different central stations. The threshold on the correlation coefficient is chosen such that are spatially relatively close, the next neighboring station is still included, this is the case for a threshold of about 0.3 as visible in the plot below for the *Cairns* location (Cairns is located at the dark red dot marked with a correlation coefficient of 1.0).
 
 <img src="data/plots/map_correlation_between_locations_for_Rainfall_and_Location_Cairns.png" width="600"/>
 
-For some stations that are spatially isolated from the rest of the stations, the correlation coeeficient of the next neighbouring station is below 0.3. Therefore, for such stations the station with largest coefficient is included, which is *Woomera* for the example of *AliceSprings* shown in the plot below.
+For some stations that are spatially isolated from the rest of the stations, the correlation coefficient of the next neighboring station is below 0.3. Therefore, for such stations the station with largest coefficient is included, which is *Woomera* for the example of *AliceSprings* shown in the plot below.
 
 <img src="data/plots/map_correlation_between_locations_for_Rainfall_and_Location_AliceSprings.png" width="600"/>
 
@@ -888,11 +888,11 @@ For the station containing the least amount of NaN values, *MelbourneAirport*, s
 
 <img src="data/plots/map_correlation_between_locations_for_Rainfall_and_Location_MelbourneAirport.png" width="600"/>
 
-For the correlation threshold of 0.3 we would also include stations far away from the chosen one *MelbourneAirport* as visible in the last plot. Therefore a second preprocessing with a higher threshold of 0.5 is tested as well.
+For the correlation threshold of 0.3 we would also include stations far away from the chosen one *MelbourneAirport* as visible in the last plot. Therefore, a second preprocessing with a higher threshold of 0.5 is tested as well.
 
 ##### **Spatial Distance:**
 
-Spatial distance as metric (based on 2D distance on surface of the Earth). This is the more intuitive metric for finding nearby stations and was discussed already at the end of the previous modeling section and shown in a map with circles of 100km radius around each station. The weights for averaging over neabry stations was chosen to be $w = \frac{1}{\mathrm{distance} + 200}\cdot 200$, in order to give the central station a weight of one and a station in 100km distance a weight of 2/3. Two different thresholds on the maximum distance to include in the calculation of the weighted-average were chosen, 100km and 300km, where the 100km threshold practivally corresponds to taking only the nearest neighbor into consideration.
+Spatial distance as metric (based on 2D distance on surface of the Earth). This is the more intuitive metric for finding nearby stations and was discussed already at the end of the previous modeling section and shown in a map with circles of 100km radius around each station. The weights for averaging over nearby stations was chosen to be $w = \frac{1}{\mathrm{distance} + 200}\cdot 200$, in order to give the central station a weight of one and a station in 100km distance a weight of 2/3. Two different thresholds on the maximum distance to include in the calculation of the weighted average were chosen, 100km and 300km, where the 100km threshold practically corresponds to taking only the nearest neighbor into consideration.
 
 In two following tables we give an overview on the different weights for each pair of locations.
 
@@ -927,7 +927,7 @@ Weights for feature engineering of weighted average over nearby stations for Pea
 | Williamtown      |              0 |        0   |      0   |        0   |     0   |            0.3 |        0 |        0 |         0   |                0   |       0   |     0   |            0   |               0 |         0   |     0   |            0   |        0   |    0   |      0.5 |             0.4 |          0   |          0   |        0   |           1   |       0   |
 | Woomera          |              0 |        0   |      0   |        0   |     0   |            0   |        0 |        0 |         0.3 |                0   |       0   |     0   |            0   |               0 |         0.3 |     0   |            0   |        0   |    0   |      0   |             0   |          0   |          0   |        0   |           0   |       1   |
 
-Weights for feature engineering of weighted average over nearby stations for distance of locations as metric with a threshold of <100km radius (if this yields none, the station with next larger distance is chosen (e.g. for AliceSprings)):
+Weights for feature engineering of weighted average over nearby stations for distance of locations as metric with a threshold of <100km radius (if this yields none, the station with next larger distance is chosen (e.g., for AliceSprings)):
 
 | Location         |   AliceSprings |   Brisbane |   Cairns |   Canberra |   Cobar |   CoffsHarbour |   Darwin |   Hobart |   Melbourne |   MelbourneAirport |   Mildura |   Moree |   MountGambier |   NorfolkIsland |   Nuriootpa |    Perth |   PerthAirport |   Portland |    Sale |   Sydney |   SydneyAirport |   Townsville |   WaggaWagga |   Watsonia |   Williamtown |   Woomera |
 |:-----------------|---------------:|-----------:|---------:|-----------:|--------:|---------------:|---------:|---------:|------------:|-------------------:|----------:|--------:|---------------:|----------------:|------------:|---------:|---------------:|-----------:|--------:|---------:|----------------:|-------------:|-------------:|-----------:|--------------:|----------:|
@@ -960,11 +960,11 @@ Weights for feature engineering of weighted average over nearby stations for dis
 
 #### **5. NaN treatment:**
 
-Dropping NaNs yielded the best performance in the previous modelling section. Therefore, if the weighted-average over nearby stations is also a NaN value for a feature, the entry will be dropped. Otherwise, if the weighted-average is available for the missing feature: replace the NaN by the weighted-average value from the weighted-average feature column. We do not try to use mean or mode because no performance improvement compared to dropping NaNs was found in first modeling attempts (best performance (although just slightly better) found for dropping all NaN and using oversampling).
+Dropping NaNs yielded the best performance in the previous modelling section. Therefore, if the weighted average over nearby stations is also a NaN value for a feature, the entry will be dropped. Otherwise, if the weighted-average is available for the missing feature: replace the NaN by the weighted-average value from the weighted-average feature column. We do not try to use mean or mode because no performance improvement compared to dropping NaNs was found in first modeling attempts (best performance (although just slightly better) found for dropping all NaN and using oversampling).
 
 ## Preprocessing constellations and data selections
 The following 5 different preprocessed datasets were chosen for redoing each model of the previous section and checking for improvements in the model's performances:
-- Only use the location with least amount of NaN values for modeling: *MelbourneAirport* (0.973 NaN content among 3009 entries (01.01.2009-25.06.2017) as given in a table above): This location might give an estimate of the highest performance achievable with the features available in our dataset. If the performance is not increasing, the *RainTomorrow* target varibale might not be clearly determined by the available features ((half-) daily data). As for the weighted-average over nearby stations, the 100km distance metric was chosen.
+- Only use the location with least amount of NaN values for modeling: *MelbourneAirport* (0.973 NaN content among 3009 entries (01.01.2009-25.06.2017) as given in a table above): This location might give an estimate of the highest performance achievable with the features available in our dataset. If the performance is not increasing, the *RainTomorrow* target variable might not be clearly determined by the available features ((half-) daily data). As for the weighted average over nearby stations, the 100km distance metric was chosen.
 - different metrics for weighted-average of nearby stations for the whole dataset (including 26 stations):
     - distance as metric with weight $w = \frac{1}{\mathrm{distance} + 200}\cdot 200 \rightarrow$ at a radius of 100km the weight is reduce to 2/3 of the central weight (weight of station itself).
         - include all stations within 100km radius or at least nearest neighbor (if minimum distance is $>100$km), which is almost equal to including just the next neighboring station.
@@ -1009,7 +1009,7 @@ Classification report:
 | f1-score  |   0.88 |   0.52 |        0.8 |        0.7  |           0.8  |
 | support   | 464    | 134    |        0.8 |      598    |         598    |
 
-after modify the data loading part and update the input dimension in the Keras
+after modifying the data loading part and updating the input dimension in the Keras
 
 Confusion matrix:
 |   real/pred |   0.0 |   1.0 |
@@ -1042,7 +1042,7 @@ The support indicates the number of occurrences of each class in the true labels
 Class 0.0 support: 464
 Class 1.0 support: 134
 
-Comparing the two results, we observe that the second model achieved higher accuracy (82.44% vs. 80.27%) and generally improved precision, recall, and F1-score for both classes. It has a better balance between correctly identifying positive and negative instances. Additionally, the second model shows a slightly higher support for both classes, indicating a more balanced dataset. Overall, the second model's performance is better than the first model's.
+Comparing the two results, we observe that the second model achieved higher accuracy (82.44% vs. 80.27%) and generally improved precision, recall, and F1-score for both classes. It has a better balance between correctly identifying positive and negative instances. Additionally, the second model shows a slightly higher support for both classes, indicating a more balanced dataset. Overall, the second model's performance is better than the first models.
 
 In the modified code I used 'Dropout' and 3 days, four dropout layers with a dropout rate of 20% have been added after each dense layer in the model. This helps prevent overfitting by randomly dropping out 20% of the units during training, reducing the model's reliance on specific features. I adjust the dropout rate according to my needs.
 
@@ -1073,7 +1073,7 @@ To include data from the previous 4 days in the model, I modify the input data t
 | support   | 464    | 134    |       0.81 |      598    |         598    |
 
 
-Sure! Let's compare the results between the models with dropout and 3 days of data and dropout and 4 days of data.
+Sure! Let us compare the results between the models with dropout and 3 days of data and dropout and 4 days of data.
 
 ### Model with Dropout and 3 Days of Data
 
@@ -1112,8 +1112,8 @@ The classification reports provide a detailed overview of precision, recall, F1-
 Overall, the model with dropout and 3 days of data performed slightly better than the model with dropout and 4 days of data in terms of accuracy and classification metrics. However, the differences are relatively small, and further analysis or experimentation may be required to draw definitive conclusions.
 
 ## Random Forest Classifier
-The same random forest classifier that was used in the previous modeling section was used again with the new preprocessing. Also a hyperparameter optimization by cross-validation (GridSearchCV of sklearn) was carried out, but no significant improvement over the default hyperparameter settings was found.
-The model was fitted to all 5 preprocessin constellations:
+The same random forest classifier that was used in the previous modeling section was used again with the new preprocessing. Also, a hyperparameter optimization by cross-validation (GridSearchCV of sklearn) was carried out, but no significant improvement over the default hyperparameter settings was found.
+The model was fitted to all 5 preprocessing constellations:
 - weighted-average metric: correlation
     - threshold: 0.3 
     - threshold: 0.5
@@ -1127,7 +1127,7 @@ Moreover, for each constellation different subsets of the data were used to fit 
 - only the features of the location itself (excluding the weighted-averaged features)
 - only the weighted-average features from nearby stations
 
-However, no significant differences in the model's performance was found. This indicates, that the weighted-averaged data over nearby stations contains as much, but also not more, information as the data  of the location itself. As an example, the performance of the random forest for the whole dataset (all 26 stations) and 100km distance metric (weighted-average calculation) is shown in the tables below:
+However, no significant differences in the model's performance were found. This indicates, that the weighted-averaged data over nearby stations contains as much, but also not more, information as the data of the location itself. As an example, the performance of the random forest for the whole dataset (all 26 stations) and 100km distance metric (weighted-average calculation) is shown in the tables below:
 
 |   real/pred |    0 |    1 |
 |------------:|-----:|-----:|
@@ -1152,18 +1152,18 @@ However, no significant differences in the model's performance was found. This i
 | avg_Humidity3pm   |                 0.08 |
 | Humidity3pm       |                 0.08 |
 
-The performance is almost exactly the same as for the prebious random forest that was trained on the less advanced preprocessing without weighted-average features ([Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier)). So the additional feature engineering does not improve the performance. However, it might improve the performance of more complex deep learning algorithms. The table with the feature importances shows, that the random forest uses the weighted-averaged ("avg_") features as much as the initial features. *Sunshine* and *Humidity3pm* features stay the most important features and their importance is equally divided to "avg_" and initial feature. This indicates, that the new features are meaningful, although they do not improve the performance as anticipated.
-Modelling only the *MelbourneAirport* location which featured the cleanest and most reliable data (including the weighted-average of nearby stations within a 100km radius) did not change the model performance significantly. Therefore, we conclude, that our model reached the maximum possible performance for the given data.
+The performance is almost exactly the same as for the prebious random forest that was trained on the less advanced preprocessing without weighted-average features ([Best Model - Random Forest Classifier](#Best-Model---Random-Forest-Classifier)). So, the additional feature engineering does not improve the performance. However, it might improve the performance of more complex deep learning algorithms. The table with the feature importances shows, that the random forest uses the weighted-averaged ("avg_") features as much as the initial features. *Sunshine* and *Humidity3pm* features stay the most important features, and their importance is equally divided to "avg_" and initial feature. This indicates that the new features are meaningful, although they do not improve the performance as anticipated.
+Modelling only the *MelbourneAirport* location which featured the cleanest and most reliable data (including the weighted average of nearby stations within a 100km radius) did not change the model performance significantly. Therefore, we conclude, that our model reached the maximum possible performance for the given data.
 
 ### Short Summary of all Models
-In sumarry, out of all models the random forest classifier yields the best performance (accuracy: 0.86, macro-avg F1: 0.77, weighted-avg F1: 0.85). However, logistic regression, Support Vector Machine (SVM/SVC), Gaussia Naive Bayes, and deep learning models in keras do not feature significantly decreased performances. The random forest is a computationally cheap and good performing classifier for the given task.
+In summary, out of all models the random forest classifier yields the best performance (accuracy: 0.86, macro-avg F1: 0.77, weighted-avg F1: 0.85). However, logistic regression, Support Vector Machine (SVM/SVC), Gaussian Naive Bayes, and deep learning models in keras do not feature significantly decreased performances. The random forest is a computationally cheap and good performing classifier for the given task.
 
 # Conclusions and Outlook
-A large part of this project was focussed on feature engineering and data manipulation, as the modeling was limited by the available data. The large NaN amounts in features that are most important for modeling (e.g. Sunshine, Humidity3pm, Clou3pm) led to stagnating model performance, which could also not be fixed by rethinking the preprocessing and feature engineering (adding features containing weighted-averages over neaerby stations depending on a distance and/or correlation metric). The feature engineering of the weighted-average features took much more time than anticipated, since the data manipulation is sophisticated and required to test each step for its correct operation. Also finding a good metric to judge which station to include in the weighted-average for each station required additional data manipulation and plotting. Running the preprocessing took about an hour on a Laptop, because of inefficient nested for loops (time did not allow for improving the implementation in terms of computational efficiency). Finally, the performance of the models is likely limited by the imbalance in the values/classes of target variable *RainTomorrow*, which was counteracted by oversampling, as well as by the features themselves. The features are likely to not be sufficient to achieve the anticipated performance for the prediction of *RainTomorrow*, possibly the features are not relevant enough or a more sophisticated deep learning model would have to be designed and tested to improve the predictions. Nevertheless, an accuracy of 0.86 and weighted-averaged F1-score of 0.85 for the best model, a random forest classifier are good results and the scientific approaches used for feature engineering are relevant in and of itself.
+A large part of this project was focused on feature engineering and data manipulation, as the modeling was limited by the available data. The large NaN amounts in features that are most important for modeling (e.g. Sunshine, Humidity3pm, Clou3pm) led to stagnating model performance, which could also not be fixed by rethinking the preprocessing and feature engineering (adding features containing weighted-averages over nearby stations depending on a distance and/or correlation metric). The feature engineering of the weighted-average features took much more time than anticipated, since the data manipulation is sophisticated and required to test each step for its correct operation. Also finding a good metric to judge which station to include in the weighted average for each station required additional data manipulation and plotting. Running the preprocessing took about an hour on a laptop, because of inefficient nested for loops (time did not allow for improving the implementation in terms of computational efficiency). Finally, the performance of the models is likely limited by the imbalance in the values/classes of target variable *RainTomorrow*, which was counteracted by oversampling, as well as by the features themselves. The features are likely to not be sufficient to achieve the anticipated performance for the prediction of *RainTomorrow*, possibly the features are not relevant enough or a more sophisticated deep learning model would have to be designed and tested to improve the predictions. Nevertheless, an accuracy of 0.86 and weighted-averaged F1-score of 0.85 for the best model, a random forest classifier are good results and the scientific approaches used for feature engineering are relevant in and of itself.
 
 In order to predict other weather features, such as temperature on the next day, or to do longer predictions several days in advance, the use of complex deep learning algorithms such as LSTM recurrent neural networks is proposed, since the detailed tests on machine learning and first simple neural network models showed, that the prediction capabilities are strongly limited by the available data.
-Most likely significantly more data, and data of a different type (e.g. gridded satellite data of air pressure, cloud coverage, rain, windspeeds and directions (from all over Australia with superb spatial and temporal resolution, significantly better than 26 stations and half-daily data)) is required to significantly improve the predictive power. Even professional international weather forecast providers do not make perfect predictions, even for a single day, although they rely on much more data. Furthermore, a physics fluid model or some kind of meteorological model including physically meaningul differential equations (continuity equation etc.) would improve the performance, as the machine learning models used, are not able to model the meteorological system itself.
+Most likely significantly more data, and data of a different type (e.g., gridded satellite data of air pressure, cloud coverage, rain, windspeeds and directions (from all over Australia with superb spatial and temporal resolution, significantly better than 26 stations and half-daily data)) is required to significantly improve the predictive power. Even professional international weather forecast providers do not make perfect predictions, even for a single day, although they rely on much more data. Furthermore, a physics fluid model or some kind of meteorological model including physically meaningful differential equations (continuity equation etc.) would improve the performance, as the machine learning models used, are not able to model the meteorological system itself.
 
-We conclude, that we achieved the best performance possible with the given dataset (by feature engineering and meaningful encoding of categorical variables) using machine learning algorithms and simple deep learning algorithms.
+We conclude that we achieved the best performance possible with the given dataset (by feature engineering and meaningful encoding of categorical variables) using machine learning algorithms and simple deep learning algorithms.
 
 For the final presentation we plan to create an interactive program where the user is asked to give a date (format YYYY-MM-DD) and location (as string) as input and gets the prediction for *RainTomorrow* for the nearest neighboring station as output.
